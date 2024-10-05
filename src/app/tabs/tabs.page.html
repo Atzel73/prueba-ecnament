@@ -1,31 +1,87 @@
-<!-- <ion-tabs>
-
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" href="/tabs/tab1">
-      <ion-icon aria-hidden="true" name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab2" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3" href="/tabs/tab3">
-      <ion-icon aria-hidden="true" name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-
-</ion-tabs> -->
-<ion-header>
-  <ion-toolbar>
-    <ion-title style="text-align: center;">Prueba</ion-title>
-  </ion-toolbar>
-  <ion-content [fullscreen]="true">
-    <ion-item>
-      <!-- <a href="/inicio/pagina-principal">TEXT INPUT</a> -->
-      <ion-input type="number" placeholder="Ingrese un numero"></ion-input>
+<ion-content [fullscreen]="true" class="container" style="background-color: white;">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title style="text-align: center;">Cálculo de Múltiplos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <section>
+    <ion-item class="input-item">
+      <ion-icon name="calculator-outline" slot="start" style="color: #3b5998;"></ion-icon>
+      <ion-input type="number" placeholder="Ingrese un número" [(ngModel)]="inputNumber" required></ion-input>
     </ion-item>
-  </ion-content>
-</ion-header>
+
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button color="tertiary" (click)="getNumbers()" fill="solid">
+          <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+          Activar
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button color="warning" (click)="getNumbers()" fill="solid">
+          <ion-icon slot="start" name="heart"></ion-icon>
+          Vaciar
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+
+  </section>
+
+  <section *ngIf="result" class="result-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title style="text-align: center;">Resultados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label class="result-label">
+            <p id="green" *ngIf="result.even3.length > 0; else elseBlock3">
+              <ion-icon name="ellipse-outline" style="color: green;"></ion-icon>
+              Múltiplos de 3: {{result.even3.join(', ')}}
+            </p>
+            <ng-template #elseBlock3>
+              <p id="noEven"><ion-icon name="close-circle-outline" style="color: rgb(0, 0, 0);"></ion-icon> Sin números
+                múltiplos
+                de 3</p>
+            </ng-template>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label class="result-label">
+            <p id="red" *ngIf="result.even5.length > 0; else elseBlock5">
+              <ion-icon name="ellipse-outline" style="color: red;"></ion-icon>
+              Múltiplos de 5: {{result.even5.join(', ')}}
+            </p>
+            <ng-template #elseBlock5>
+              <p id="noEven"><ion-icon name="close-circle-outline" style="color: rgb(0, 0, 0);"></ion-icon> Sin números
+                múltiplos de
+                5</p>
+            </ng-template>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-label class="result-label">
+            <p id="blue" *ngIf="result.even7.length > 0; else elseBlock7" style="color: blue;">
+              <ion-icon name="ellipse-outline" style="color: blue;"></ion-icon>
+              Múltiplos de 7: {{result.even7.join(', ')}}
+            </p>
+            <ng-template #elseBlock7>
+              <p id="noEven"> <ion-icon name="close-circle-outline" style="color: rgb(0, 0, 0);"></ion-icon> Sin números
+                múltiplos
+                de 7</p>
+            </ng-template>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </section>
+
+  <section style="text-align: center; margin-top: 10px;">
+    <p *ngIf="isChecked" id="notChecked">
+      <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
+      No has ingresado ningún número, por favor, agrega uno.
+    </p>
+  </section>
+</ion-content>
