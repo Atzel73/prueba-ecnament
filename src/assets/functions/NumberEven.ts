@@ -18,7 +18,7 @@ export function isEven(n: number) {
     if (index % 7 === 0) {
       even7.push(index);
     }
-    if (index % 3 !== 0 || index % 5 === 0 || index % 7 === 0) {
+    if (index % 3 !== 0 && index % 5 === 0 && index % 7 === 0) {
       notEven.push(index);
     }
   }
