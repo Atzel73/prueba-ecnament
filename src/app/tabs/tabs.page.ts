@@ -11,6 +11,7 @@ export class TabsPage {
   //Y su valor se asigna en tabs.page.html
   inputNumber: number | undefined;
   isChecked: boolean | undefined;
+  isEmpty: boolean | undefined;
   //Se crea la variable result de tipo objeto, y cada variable dentro de el es de tipo objeto
   //Guardando en cada una el resultado de la funcion
   result:
@@ -43,5 +44,16 @@ export class TabsPage {
     } else if (!this.inputNumber) {
       this.isChecked = true;
     }
+  }
+
+  //Funcion para borrar/vaciar el inputNumber
+  eraseButton(){
+    if(this.inputNumber){
+      this.inputNumber = undefined;
+      this.isEmpty = false;
+    }else{
+      this.isEmpty = true;
+    }
+    
   }
 }

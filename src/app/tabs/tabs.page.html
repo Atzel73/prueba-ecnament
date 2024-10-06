@@ -18,7 +18,7 @@
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button color="warning" (click)="getNumbers()" fill="solid">
+        <ion-button color="warning" (click)="eraseButton()" fill="solid">
           <ion-icon slot="start" name="heart"></ion-icon>
           Vaciar
         </ion-button>
@@ -82,6 +82,12 @@
     <p *ngIf="isChecked" id="notChecked">
       <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
       No has ingresado ningún número, por favor, agrega uno.
+    </p>
+  </section>
+  <section style="text-align: center; margin-top: 10px;">
+    <p *ngIf="isEmpty" id="notChecked">
+      <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
+      Antes de vaciar, por favor, ingresa un número.
     </p>
   </section>
 </ion-content>
