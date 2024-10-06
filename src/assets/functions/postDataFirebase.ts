@@ -2,13 +2,15 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export async function addResultEven(
   firestore: AngularFirestore,
-  data: any
+  data: any,
+  vuelta: number
 ): Promise<void> {
-  let vuelta = 0;
+  let dataResult = {
+    vuelta: vuelta,
+    ...data,
+  };
   try {
-    vuelta = vuelta + 1;
-    data.push(vuelta);
-    await firestore.collection('number-even').add(data);
+    await firestore.collection('number-even').add(dataResult);
     console.log('Dato guardado exitosamente en Firestore');
   } catch (error) {
     console.error('Error al guardar el dato en Firestore: ', error);

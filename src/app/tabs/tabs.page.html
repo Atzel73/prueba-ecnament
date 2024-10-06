@@ -91,7 +91,7 @@
     </p>
   </section>
   <section style="text-align: center; margin-top: 10px;">
-    <p *ngIf="isError; else elseBlockError" id="notChecked">
+    <p *ngIf="!isError; else elseBlockError" id="notChecked">
       <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
       Error al guardar el resultado en Firestore.
     </p>
