@@ -9,6 +9,9 @@ export function isEven(n: number) {
   //Se usa un ciclo for para dar las vueltas en base al numero
   //Entrante por parametro
   for (let index = 1; index <= n; index++) {
+
+
+    //Por cada numero en la iteracion, se agregara a su respectivo arreglo
     if (index % 3 === 0) {
       even3.push(index);
     }
@@ -22,5 +25,7 @@ export function isEven(n: number) {
       notEven.push(index);
     }
   }
+
+  //Retorna un arreglo de las variables
   return { even3, even5, even7, notEven };
 }

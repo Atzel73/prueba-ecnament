@@ -1,0 +1,85 @@
+<ion-content [fullscreen]="true" class="container" style="background-color: white;">
+    <ion-header>
+        <ion-toolbar>
+            <ion-title style="text-align: center;">Cálculo de Múltiplos</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <section>
+        <ion-item class="input-item">
+            <ion-icon name="calculator-outline" slot="start" style="color: #3b5998;"></ion-icon>
+            <ion-input type="number" placeholder="Ingrese un número" [(ngModel)]="inputNumber" required></ion-input>
+        </ion-item>
+
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-button color="tertiary" (click)="getNumbers()" fill="solid"
+                    style="font-size: 1.2em; padding: 10px 20px;">
+                    <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
+                    Activar
+                </ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+                <ion-button color="warning" (click)="eraseButton()" fill="solid"
+                    style="font-size: 1.2em; padding: 10px 20px;">
+                    <ion-icon slot="start" name="heart"></ion-icon>
+                    Vaciar
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+
+    </section>
+
+    <section *ngIf="result" class="result-container">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title style="text-align: center;">Resultados</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-item lines="none">
+                    <ion-label class="result-label">
+                        <p id="green" *ngIf="result.even3.length > 0; else elseBlock3">
+                            <ion-icon name="ellipse-outline" style="color: green;"></ion-icon>
+                            Múltiplos de 3: {{result.even3.join(', ')}}
+                        </p>
+                        <ng-template #elseBlock3>
+                            <p id="noEven"><ion-icon name="close-circle-outline"
+                                    style="color: rgb(0, 0, 0);"></ion-icon> Sin números
+                                múltiplos
+                                de 3</p>
+                        </ng-template>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-label class="result-label">
+                        <p id="red" *ngIf="result.even5.length > 0; else elseBlock5">
+                            <ion-icon name="ellipse-outline" style="color: red;"></ion-icon>
+                            Múltiplos de 5: {{result.even5.join(', ')}}
+                        </p>
+                        <ng-template #elseBlock5>
+                            <p id="noEven"><ion-icon name="close-circle-outline"
+                                    style="color: rgb(0, 0, 0);"></ion-icon> Sin números
+                                múltiplos de
+                                5</p>
+                        </ng-template>
+                    </ion-label>
+                </ion-item>
+
+                <ion-item lines="none">
+                    <ion-label class="result-label">
+                        <p id="blue" *ngIf="result.even7.length > 0; else elseBlock7" style="color: blue;">
+                            <ion-icon name="ellipse-outline" style="color: blue;"></ion-icon>
+                            Múltiplos de 7: {{result.even7.join(', ')}}
+                        </p>
+                        <ng-template #elseBlock7>
+                            <p id="noEven"> <ion-icon name="close-circle-outline"
+                                    style="color: rgb(0, 0, 0);"></ion-icon> Sin números
+                                múltiplos
+                                de 7</p>
+                        </ng-template>
+                    </ion-label>
+                </ion-item>
+            </ion-card-content>
+        </ion-card>
+    </section>
+</ion-content>
