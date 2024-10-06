@@ -15,6 +15,7 @@ export class TabsPage {
   isChecked: boolean | undefined;
   isEmpty: boolean | undefined;
   isError: boolean = false;
+  isSuccess: boolean = false;
   vuelta: number = 0;
   result:
     | { even3: number[]; even5: number[]; even7: number[]; notEven: number[] }
@@ -32,21 +33,20 @@ export class TabsPage {
       };
       this.vuelta += 1;
       this.isChecked = false;
-      this.isError = true;
+      this.isError = false;
+      this.isSuccess = false;
       this.saveEven(this.result, this.vuelta);
-
-      //Despues de guardar los datos, se activa un Toast de confirmacion
-    } else if (!this.inputNumber) {
+    } else {
       this.isChecked = true;
     }
   }
 
-  //Funcion para borrar/vaciar el inputNumber
   eraseButton() {
     if (this.inputNumber) {
       this.inputNumber = undefined;
       this.isEmpty = false;
       this.isError = false;
+      this.isSuccess = false;
       this.isChecked = false;
       this.result = undefined;
     } else {
@@ -54,9 +54,15 @@ export class TabsPage {
     }
   }
 
-  //Funcion para guardar los datos en la base de datos
   async saveEven(data: any, vuelta: number) {
-    await addResultEven(this.firestore, data, vuelta);
-    this.isError = true;
+    try {
+      await addResultEven(this.firestore, data, vuelta);
+      this.isError = false;
+      this.isSuccess = true;
+    } catch (error) {
+      console.error('Error al guardar los datos:', error);
+      this.isError = true;
+      this.isSuccess = false;
+    }
   }
 }
