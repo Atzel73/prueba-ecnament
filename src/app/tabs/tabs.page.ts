@@ -2,14 +2,17 @@ import { Component } from '@angular/core';
 import { isEven } from 'src/assets/functions/NumberEven';
 import { addResultEven } from 'src/assets/functions/postDataFirebase';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-tabs',
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss'],
 })
 export class TabsPage {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private toastController: ToastController
+  ) {}
 
   inputNumber: number | undefined;
   isChecked: boolean | undefined;
@@ -21,7 +24,7 @@ export class TabsPage {
     | { even3: number[]; even5: number[]; even7: number[]; notEven: number[] }
     | undefined;
 
-  getNumbers() {
+  async getNumbers() {
     if (this.inputNumber) {
       const result = isEven(this.inputNumber);
 
@@ -35,13 +38,18 @@ export class TabsPage {
       this.isChecked = false;
       this.isError = false;
       this.isSuccess = false;
-      this.saveEven(this.result, this.vuelta);
+      await this.saveEven(this.result, this.vuelta);
     } else {
       this.isChecked = true;
+      const toast = await this.toastController.create({
+        message: 'Por favor, agregue un numero',
+        duration: 2000,
+      });
+      toast.present();
     }
   }
 
-  eraseButton() {
+  async eraseButton() {
     if (this.inputNumber) {
       this.inputNumber = undefined;
       this.isEmpty = false;
@@ -49,8 +57,18 @@ export class TabsPage {
       this.isSuccess = false;
       this.isChecked = false;
       this.result = undefined;
+      const toast = await this.toastController.create({
+        message: 'Pantalla limpia',
+        duration: 2000,
+      });
+      toast.present();
     } else {
       this.isEmpty = true;
+      const toast = await this.toastController.create({
+        message: 'Antes de vaciar, asegurate de agregar un numero',
+        duration: 2000,
+      });
+      toast.present();
     }
   }
 
@@ -59,10 +77,20 @@ export class TabsPage {
       await addResultEven(this.firestore, data, vuelta);
       this.isError = false;
       this.isSuccess = true;
+      const toast = await this.toastController.create({
+        message: '¡Datos guardados!',
+        duration: 2000,
+      });
+      toast.present();
     } catch (error) {
       console.error('Error al guardar los datos:', error);
       this.isError = true;
       this.isSuccess = false;
+      const toast = await this.toastController.create({
+        message: '¡Error al guardar los datos!',
+        duration: 2000,
+      });
+      toast.present();
     }
   }
 }

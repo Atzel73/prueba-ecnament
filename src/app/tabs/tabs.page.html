@@ -78,27 +78,7 @@
     </ion-card>
   </section>
 
-  <section style="text-align: center; margin-top: 10px;">
-    <p *ngIf="isChecked" id="notChecked">
-      <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
-      No has ingresado ningún número, por favor, agrega uno.
-    </p>
-  </section>
-  <section style="text-align: center; margin-top: 10px;">
-    <p *ngIf="isEmpty" id="notChecked">
-      <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
-      Antes de vaciar, por favor, ingresa un número.
-    </p>
-  </section>
-  <section style="text-align: center; margin-top: 10px;">
-    <p *ngIf="isError; else elseBlockSuccess" id="notChecked">
-      <ion-icon name="alert-circle-outline" style="color: red;"></ion-icon>
-      Error al guardar el resultado en Firestore.
-    </p>
-    <ng-template #elseBlockSuccess>
-      <p *ngIf="isSuccess">¡Datos guardados!</p>
-    </ng-template>
-  </section>
+
 
 
 </ion-content>
